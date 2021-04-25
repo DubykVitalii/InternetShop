@@ -26,5 +26,6 @@ public class UserService {
 //        2. new User(username, password)
 //        3. userDao.saveUser(newUser)
 //        4. return user
+        return null;
     }
 }
