@@ -4,6 +4,7 @@ import main.java.dao.ProductDao;
 import main.java.model.Product;
 import main.java.model.ProductCategory;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +61,11 @@ public class ProductInMemoryDao implements ProductDao {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return new ArrayList<>(products);
     }
 
     @Override
