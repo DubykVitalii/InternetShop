@@ -52,10 +52,10 @@ public class LoginMenu implements Menu {
         try {
             userService.login(username, password);
 
-        } catch (WrongCredentialsException e) {
-            // System.oty.println("Username or password are incorrect. Please try again...");
-            // show login view
-        } catch (Exception e2) {
+//        } catch (WrongCredentialsException e) {
+//            // System.oty.println("Username or password are incorrect. Please try again...");
+//            // show login view
+//        } catch (Exception e2) {
 
         } catch (Exception e3) {
 
