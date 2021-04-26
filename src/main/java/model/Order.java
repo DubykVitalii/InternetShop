@@ -14,6 +14,14 @@ public class Order {
     private double sum;
     private OrderStatus orderStatus;
 
+    public Order(String customerId) {
+        this.orderId = UUID.randomUUID().toString();
+        this.dateCreated = new Date();
+        this.customerId = customerId;
+        this.sum = 0;
+        this.orderStatus = OrderStatus.UNCONFIRMED;
+    }
+
     public Order(String customerId, Product product) {
         this.orderId = UUID.randomUUID().toString();
         this.dateCreated = new Date();
@@ -50,23 +58,15 @@ public class Order {
     public void addProductOfOrder(Product product) {
         this.listOfProducts.add(product);
         this.sum = sum + product.getPrice();
+        product.setAmountInStock(product.getAmountInStock() - 1);
     }
 
     public void removeProductOfOrder(Product product) {
         this.listOfProducts.remove(product);
+        this.sum = this.sum - product.getPrice();
+        product.setAmountInStock(product.getAmountInStock() + 1);
     }
 
-    public void orderConfirmed() {
-        this.orderStatus = OrderStatus.CONFIRMED;
-    }
-
-    public void orderCancelled() {
-        this.orderStatus = OrderStatus.CANCELLED;
-    }
-
-    public void orderCancelledUser() {
-        this.orderStatus = OrderStatus.CANCELLED_USER;
-    }
 
     @Override
     public String toString() {

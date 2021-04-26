@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface OrderDao {
 
-    void createOrder(Order order);
+
+    void addOrderInMemoryDao(Order order);
+
+    void deleteOrder(Order order);
 
     Order getOrderById(String orderId);
-
-    void updateOrder(Order order);
 
     List<Order> getAllOrders();
 
     List<Order> getUserOrders(String userId);
 
-    void cancelDeliveryStatusOrderUser(long idOrder);
 }
