@@ -1,6 +1,9 @@
 package main.java.service;
 
+import main.java.dao.inmemorydb.OrderInMemoryDao;
 import main.java.model.*;
+
+import java.util.List;
 
 // Make it singleton
 public class AdminService {
@@ -50,5 +53,17 @@ public class AdminService {
 
     public void deleteProduct(Product product) {
         product = null;
+    }
+
+    public void showListOfSubmittedOrders() {
+        List<Order> orders =OrderInMemoryDao.getEntity().getAllOrders();
+
+        for(Order order: orders){
+            System.out.println(order.toString());
+        }
+    }
+
+    public void showListOfUsers(){
+
     }
 }
