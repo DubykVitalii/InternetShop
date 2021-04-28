@@ -10,17 +10,16 @@ public class AdminPmChat implements Menu {
     private Scanner scannerInt;
     private Scanner scannerString;
 
-    private final String[] itemsAdminChat = {"1.Send a chat message", "2.Show chat", "0. Exit"};
+    private final String[] itemsAdminChat = {"1.Show chat", "0. Exit"};
 
     /**
      * Admin pm chat
      *
      * @param itemsAdminChat - items pm chat admin
-     * @param choice         - choice user (1,2 or 0)
+     * @param choice         - choice user (1 or 0)
      *
      *                       <p>
-     *                       if choice 1 send a chat new message
-     *                       if choice 2 show all chat
+     *                       if choice 1 show chats with users
      *                       if choice 0 exit main admin menu
      */
     @Override
@@ -34,17 +33,27 @@ public class AdminPmChat implements Menu {
 
             switch (choice) {
                 case 1:
+                    System.out.println("Chats:");
+                    try {
+                        PmChatInMemoryDao.getEntity().userChatsName();
+                    } catch (NullPointerException e) {
+                        System.out.println("Chats is empty");
+                        show();
+                    }
+                    System.out.println("Enter userChatsName:");
+                    String userChatName = scannerString.nextLine();
+                    try {
+                        showEntity(PmChatInMemoryDao.getEntity().getChatUser(userChatName).toString());
+                    } catch (NullPointerException e) {
+                        System.err.println("Chat is empty");
+                        show();
+                    }
                     System.out.println("Enter a text:");
                     String newMessage = scannerString.nextLine();
-                    PmChatInMemoryDao.getEntity().addMessage(Session.getCurrentUser().getUsername(), newMessage);
+                    PmChatInMemoryDao.getEntity().addMessageAdmin(Session.getCurrentUser().getUsername(), userChatName, newMessage);
                     System.out.println("Message send successfully");
                     show();
                     break;
-                case 2:
-                        System.out.print("Chat:");
-                        showEntity(PmChatInMemoryDao.getEntity().getAllChat().toString());
-                        System.out.println();
-                        show();
                 case 0:
                     exit();
                     break;

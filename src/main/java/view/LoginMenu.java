@@ -109,7 +109,7 @@ public class LoginMenu implements Menu {
 
     private void registerSubMenu(Scanner scannerString) {
 
-        System.out.println("Create login:");
+        System.out.println("Create username:");
         String username = scannerString.next();
 
 

@@ -6,10 +6,12 @@ import main.java.model.PmChat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class PmChatInMemoryDao implements PmChatDao {
 
-    private final List<PmChat> pmChats = new ArrayList<>();
+    private final Map<String, List<PmChat>> pmChats = new TreeMap<>();
     private static PmChatDao entity;
 
     private PmChatInMemoryDao() {
@@ -23,31 +25,44 @@ public class PmChatInMemoryDao implements PmChatDao {
     }
 
     /**
-     * Add new message
+     * Add new message user
      *
      * @param message
      */
 
     @Override
-    public void addMessage(String username, String message) {
-        pmChats.add(new PmChat(username, message));
+    public void addMessageUser(String username, String message) {
+        if (pmChats.get(username) == null) {
+            List<PmChat> pchat = new ArrayList<>();
+            pchat.add(new PmChat(username, message));
+            pmChats.put(username, pchat);
+        } else {
+
+            PmChat pmChat = new PmChat(username, message);
+            pmChats.get(username).add(pmChat);
+        }
     }
 
     /**
-     * Get chat by id
+     * Add new message admin
      *
-     * @return chat by id
+     * @param message
      */
-
     @Override
-    public PmChat getChatById(int idChat) {
-        PmChat pmChat = null;
-        for (PmChat findChat : pmChats) {
-            if (findChat.getIdChat() == (idChat)) {
-                pmChat = findChat;
-            }
-        }
-        return pmChat;
+    public void addMessageAdmin(String adminname, String username, String message) {
+        PmChat pmChat = new PmChat(adminname, message);
+        pmChats.get(username).add(pmChat);
+    }
+
+    /**
+     * Get all user
+     *
+     * @return all chat
+     */
+    @Override
+    public List<PmChat> getChatUser(String username) {
+
+        return pmChats.get(username);
     }
 
     /**
@@ -55,9 +70,21 @@ public class PmChatInMemoryDao implements PmChatDao {
      *
      * @return all chat
      */
+
     @Override
-    public List<PmChat> getAllChat() {
-        return List.copyOf(pmChats);
+    public Map<String, List<PmChat>> getAllChat() {
+        return pmChats;
+    }
+
+    /**
+     * Get chats name
+     * <p>
+     * void chat name(username is chat name)
+     */
+    public void userChatsName() {
+        for (Map.Entry<String, List<PmChat>> pmChat : pmChats.entrySet()) {
+            System.out.println(pmChat.getKey());
+        }
     }
 
 }

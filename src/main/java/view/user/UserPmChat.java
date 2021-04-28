@@ -20,7 +20,7 @@ public class UserPmChat implements Menu {
      *
      *                      <p>
      *                      if choice 1 send a chat new message
-     *                      if choice 2 show all chat
+     *                      if choice 2 show chat with admin
      *                      if choice 0 exit main user menu
      */
     @Override
@@ -37,15 +37,20 @@ public class UserPmChat implements Menu {
                 case 1:
                     System.out.println("Enter a text:");
                     String newMessage = scannerString.nextLine();
-                    PmChatInMemoryDao.getEntity().addMessage(Session.getCurrentUser().getUsername(), newMessage);
+                    PmChatInMemoryDao.getEntity().addMessageUser(Session.getCurrentUser().getUsername(), newMessage);
                     System.out.println("Message send successfully");
                     show();
                     break;
                 case 2:
-                        System.out.print("Chat:");
-                        showEntity(PmChatInMemoryDao.getEntity().getAllChat().toString());
-                        System.out.println();
+                    System.out.print("Chat:");
+                    try {
+                        showEntity(PmChatInMemoryDao.getEntity().getChatUser(Session.getCurrentUser().getUsername()).toString());
+                    } catch (NullPointerException e) {
+                        System.err.println("Chat is empty");
                         show();
+                    }
+                    System.out.println();
+                    show();
                 case 0:
                     exit();
                     break;

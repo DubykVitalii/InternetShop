@@ -65,7 +65,7 @@ public class Product {
         return "\nProductID:" + productId +
                 ", Name:" + name + '\'' +
                 ", Price:" + price + '\'' +
-//                ", AmountInStock:" + amountInStock +
+ //               ", AmountInStock:" + amountInStock +
                 ", Category:" + category +
                 '}';
     }

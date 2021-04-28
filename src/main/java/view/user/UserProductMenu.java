@@ -32,7 +32,7 @@ public class UserProductMenu implements Menu {
             switch (choice) {
                 case 1:
                     showEntity(ProductInMemoryDao.getEntity().getAllProducts().toString());
-                    System.out.println("1. Buy product");
+                    System.out.println("1. Add shopping cart product");
                     System.out.println("0. Exit Product Menu");
                     int choiceBuyOrExit = scanner.nextInt();
                     if (choiceBuyOrExit == 1) {

@@ -3,12 +3,19 @@ package main.java.dao;
 import main.java.model.PmChat;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PmChatDao {
 
-    void addMessage(String username, String message);
+    void addMessageUser(String username, String message);
 
-    PmChat getChatById(int idChat);
+    void addMessageAdmin(String adminname,String username, String message);
 
-    List<PmChat> getAllChat();
+
+    List<PmChat> getChatUser(String username);
+
+    Map<String, List<PmChat>> getAllChat();
+
+    public void userChatsName();
+
 }
