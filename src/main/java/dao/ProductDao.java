@@ -4,7 +4,6 @@ import main.java.model.Product;
 import main.java.model.ProductCategory;
 
 import java.util.List;
-import java.util.Set;
 
 public interface ProductDao {
 
@@ -12,7 +11,7 @@ public interface ProductDao {
 
     void updateProduct(Product product);
 
-    Product getProductById(String productId);
+    Product getProductById(int productId);
 
     List<Product> getProductsByName(String name);
 
@@ -20,5 +19,6 @@ public interface ProductDao {
 
     List<Product> getAllProducts();
 
-    void removeProduct(String productId);
+    void removeProduct(int productId);
+
 }

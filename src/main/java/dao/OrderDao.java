@@ -11,10 +11,10 @@ public interface OrderDao {
 
     void deleteOrder(Order order);
 
-    Order getOrderById(String orderId);
+    Order getOrderById(int orderId);
 
     List<Order> getAllOrders();
 
-    List<Order> getUserOrders(String userId);
+    List<Order> getUserOrders(int userId);
 
 }

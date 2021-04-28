@@ -3,27 +3,28 @@ package main.java.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 public class Order {
+    private static int count = 0;
 
-    private final String orderId;
+
+    private final int orderId;
     private final Date dateCreated;
-    private final String customerId;
+    private final int customerId;
     private List<Product> listOfProducts = new ArrayList<>();
     private double sum;
     private OrderStatus orderStatus;
 
-    public Order(String customerId) {
-        this.orderId = UUID.randomUUID().toString();
+    public Order(int customerId) {
+        this.orderId = count++;
         this.dateCreated = new Date();
         this.customerId = customerId;
         this.sum = 0;
         this.orderStatus = OrderStatus.UNCONFIRMED;
     }
 
-    public Order(String customerId, Product product) {
-        this.orderId = UUID.randomUUID().toString();
+    public Order(int customerId, Product product) {
+        this.orderId = count++;
         this.dateCreated = new Date();
         this.customerId = customerId;
         this.listOfProducts.add(product);
@@ -31,36 +32,53 @@ public class Order {
         this.orderStatus = OrderStatus.UNCONFIRMED;
     }
 
-    public String getOrderId() {
+    /**
+     * Get order by id
+     *
+     * @return found order by id
+     */
+    public int getOrderId() {
         return orderId;
     }
 
-    public String getCustomerId() {
+    /**
+     * Get customer id order
+     *
+     * @return found id customer order
+     */
+    public int getCustomerId() {
         return customerId;
     }
+
+    /**
+     * Get list of product
+     *
+     * @return list of product order
+     */
 
     public List<Product> getListOfProducts() {
         return listOfProducts;
     }
 
-    public void setListOfProducts(List<Product> listOfProducts) {
-        this.listOfProducts = listOfProducts;
-    }
-
-    public OrderStatus getDeliveryStatusOrder() {
-        return orderStatus;
-    }
-
-    public void setDeliveryStatusOrder(OrderStatus orderStatus) {
+    /**
+     * Set order status
+     */
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
 
+    /**
+     * Add product of order
+     */
     public void addProductOfOrder(Product product) {
         this.listOfProducts.add(product);
         this.sum = sum + product.getPrice();
         product.setAmountInStock(product.getAmountInStock() - 1);
     }
 
+    /**
+     * Remove product of order
+     */
     public void removeProductOfOrder(Product product) {
         this.listOfProducts.remove(product);
         this.sum = this.sum - product.getPrice();
@@ -70,12 +88,12 @@ public class Order {
 
     @Override
     public String toString() {
-        return "\nOrder{" +
-                ", date=" + dateCreated +
-                ", customerId=" + customerId +
-                ", listOfProduct=" + listOfProducts +
-                ", sum=" + sum +
-                ", deliveryStatusOrder=" + orderStatus +
+        return "\nOrderID:" + orderId +
+                ", Date:" + dateCreated +
+                ", CustomerId:" + customerId +
+                ", ListOfProduct:" + listOfProducts +
+                ", Sum order:" + sum +
+                ", OrderStatus=" + orderStatus +
                 '}';
     }
 }

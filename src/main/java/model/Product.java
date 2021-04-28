@@ -1,26 +1,25 @@
 package main.java.model;
 
 import java.util.Objects;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Product {
+    private static int count = 0;
 
-    private final String productId;
+    private int productId;
     private String name;
     private double price;
     private int amountInStock;
     private ProductCategory category;
 
     public Product(String name, double price, int amountInStock, ProductCategory category) {
-        this.productId = UUID.randomUUID().toString();
+        this.productId = count++;
         this.name = name;
         this.price = price;
         this.amountInStock = amountInStock;
         this.category = category;
     }
 
-    public String getId() {
+    public int getId() {
         return productId;
     }
 
@@ -60,13 +59,14 @@ public class Product {
         this.category = category;
     }
 
+
     @Override
     public String toString() {
-        return "Product {" +
-                ", name='" + name + '\'' +
-                ", price='" + price + '\'' +
-                ", amountInStock=" + amountInStock +
-                ", category=" + category +
+        return "\nProductID:" + productId +
+                ", Name:" + name + '\'' +
+                ", Price:" + price + '\'' +
+//                ", AmountInStock:" + amountInStock +
+                ", Category:" + category +
                 '}';
     }
 
@@ -75,7 +75,7 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return productId.equals(product.productId);
+        return productId == (product.productId);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class AdminService {
     }
 
     public Order changeOrderStatus(Order order, OrderStatus orderStatus) {
-        order.setDeliveryStatusOrder(orderStatus);
+        order.setOrderStatus(orderStatus);
         return order;
     }
 
@@ -48,7 +48,4 @@ public class AdminService {
         product.setCategory(newCategory);
     }
 
-    public void deleteProduct(Product product) {
-        product = null;
-    }
 }

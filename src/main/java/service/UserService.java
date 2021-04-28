@@ -6,8 +6,18 @@ import main.java.model.User;
 
 // TODO: make it singleton
 public class UserService {
-
+    private static UserService userService;
     private final UserDao userDao = UserInMemoryDao.getEntity();
+
+    private UserService() {
+    }
+
+    public static UserService getUserService() {
+        if (userService == null) {
+            userService = new UserService();
+        }
+        return userService;
+    }
 
     /**
      * Used to login a user
@@ -17,15 +27,20 @@ public class UserService {
      * @return outcome of login - success or not
      */
     public boolean login(String username, String password) {
-        return true;
+        User user = UserInMemoryDao.getEntity().getUserByUsername(username);
+        return user.getPassword().equals(password);
     }
 
-    public User signUp(final String username, final String password) {
-//        1. check if username is available
-//        1.1. if username is taken throw UsernameIsTakenException()
-//        2. new User(username, password)
-//        3. userDao.saveUser(newUser)
-//        4. return user
-        return null;
+    /**
+     * Actice user
+     *
+     * @param username user name
+     * @return boolean isActice user;
+     */
+
+    public boolean isActive(String username) {
+        User user = UserInMemoryDao.getEntity().getUserByUsername(username);
+        return user.isActive();
     }
+
 }

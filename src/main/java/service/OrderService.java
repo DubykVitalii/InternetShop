@@ -61,8 +61,8 @@ public class OrderService {
      * Show orders user.
      */
 
-    public void ordersUser() {
-        System.out.println(OrderInMemoryDao.getEntity().getUserOrders(Session.getCurrentUser().getUserId()).toString());
+    public String ordersUser() {
+        return OrderInMemoryDao.getEntity().getUserOrders(Session.getCurrentUser().getUserId()).toString();
     }
 
     /**
@@ -71,7 +71,7 @@ public class OrderService {
      * Change order status = CANCELLED_USER
      */
     public void cancelOrderAsUser(Order order) {
-        order.setDeliveryStatusOrder(OrderStatus.CANCELLED_USER);
+        order.setOrderStatus(OrderStatus.CANCELLED_USER);
     }
 
     /**
@@ -81,7 +81,7 @@ public class OrderService {
      */
 
     public void orderCancelledAsAdmin(Order order) {
-        order.setDeliveryStatusOrder(OrderStatus.CANCELLED);
+        order.setOrderStatus(OrderStatus.CANCELLED);
     }
 
     /**
@@ -90,7 +90,7 @@ public class OrderService {
      * Change order status = CONFIRMED
      */
     public void orderConfirmed(Order order) {
-        order.setDeliveryStatusOrder(OrderStatus.CONFIRMED);
+        order.setOrderStatus(OrderStatus.CONFIRMED);
     }
 
     /**
@@ -101,7 +101,7 @@ public class OrderService {
      *                Delete order(orderId) from db.
      */
 
-    public void deleteOrder(String orderId) {
+    public void deleteOrder(int orderId) {
         OrderInMemoryDao.getEntity().deleteOrder(OrderInMemoryDao.getEntity().getOrderById(orderId));
     }
 }

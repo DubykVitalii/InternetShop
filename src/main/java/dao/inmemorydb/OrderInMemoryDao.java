@@ -49,16 +49,15 @@ public class OrderInMemoryDao implements OrderDao {
      */
 
     @Override
-    public Order getOrderById(String orderId) {
+    public Order getOrderById(int orderId) {
         Order order = null;
         for (Order findOrder : orders) {
-            if (findOrder.getOrderId().equals(orderId)) {
+            if (findOrder.getOrderId() == (orderId)) {
                 order = findOrder;
             }
         }
         return order;
     }
-
 
     /**
      * Get all orders
@@ -73,14 +72,15 @@ public class OrderInMemoryDao implements OrderDao {
 
     /**
      * Get user orders
+     *
      * @param userId - id user
      * @return List<Order> user orders
      */
 
     @Override
-    public List<Order> getUserOrders(String userId) {
+    public List<Order> getUserOrders(int userId) {
         List<Order> ordersUser;
-        ordersUser = orders.stream().filter(order -> order.getCustomerId().equals(userId)).collect(Collectors.toList());
+        ordersUser = orders.stream().filter(order -> order.getCustomerId() == userId).collect(Collectors.toList());
         return ordersUser;
     }
 

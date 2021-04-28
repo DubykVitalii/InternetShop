@@ -15,6 +15,26 @@ public class ProductInMemoryDao implements ProductDao {
     private static ProductDao entity;
 
     private ProductInMemoryDao() {
+        Product milk = new Product("Milk", 20, 20, ProductCategory.FOOD);
+        Product water = new Product("Water", 10, 50, ProductCategory.FOOD);
+        Product honey = new Product("Honey", 125, 20, ProductCategory.FOOD);
+        Product apple = new Product("Apple", 25, 50, ProductCategory.FOOD);
+        Product tomato = new Product("Tomato", 22, 20, ProductCategory.FOOD);
+        Product meat = new Product("Meat", 150, 50, ProductCategory.FOOD);
+        Product beef = new Product("Beef", 200, 20, ProductCategory.FOOD);
+        Product iPhone = new Product("iPhone12", 20000, 20, ProductCategory.GADGETS);
+        Product asus_laptop_x500 = new Product("Asus Laptop x500", 200, 20, ProductCategory.GADGETS);
+        Product jackDaniels = new Product("Jack Daniels", 500, 20, ProductCategory.ALCOHOL);
+        products.add(milk);
+        products.add(water);
+        products.add(honey);
+        products.add(apple);
+        products.add(tomato);
+        products.add(meat);
+        products.add(beef);
+        products.add(iPhone);
+        products.add(asus_laptop_x500);
+        products.add(jackDaniels);
     }
 
     public static ProductDao getEntity() {
@@ -24,24 +44,41 @@ public class ProductInMemoryDao implements ProductDao {
         return entity;
     }
 
+    /**
+     * Add product in memory dao
+     */
     @Override
     public void addProduct(Product product) {
         products.add(product);
     }
 
+    /**
+     * Update product in memory dao
+     */
     @Override
     public void updateProduct(Product product) {
         removeProduct(product.getId());
         products.add(product);
     }
 
+    /**
+     * Get product by id
+     *
+     * @return found product by id
+     */
     @Override
-    public Product getProductById(String productId) {
+    public Product getProductById(int productId) {
         var optionalUser = products.stream()
-                .filter(productModel -> productModel.getId().equals(productId))
+                .filter(productModel -> productModel.getId() == productId)
                 .findFirst();
         return optionalUser.orElse(null);
     }
+
+    /**
+     * Get product by name
+     *
+     * @return list of product by name
+     */
 
     @Override
     public List<Product> getProductsByName(String name) {
@@ -53,6 +90,11 @@ public class ProductInMemoryDao implements ProductDao {
         }
     }
 
+    /**
+     * Get product by category
+     *
+     * @return list of product a category
+     */
     @Override
     public List<Product> getProductsByCategory(ProductCategory category) {
         if (products.stream().anyMatch(userModel -> userModel.getCategory().equals(category))) {
@@ -63,19 +105,33 @@ public class ProductInMemoryDao implements ProductDao {
         }
     }
 
+    /**
+     * Get all product.
+     *
+     * @return list of all products
+     */
     @Override
     public List<Product> getAllProducts() {
         return new ArrayList<>(products);
     }
 
+    /**
+     * Remove product in memory dao.
+     */
     @Override
-    public void removeProduct(String productId) {
+    public void removeProduct(int productId) {
         if (isProductInDatabase(productId)) {
             products.remove(getProductById(productId));
         }
     }
 
-    private boolean isProductInDatabase(String productId) {
-        return products.stream().anyMatch(product -> product.getId().equals(productId));
+    /**
+     * Product availability check
+     *
+     * @return boolean
+     */
+    private boolean isProductInDatabase(int productId) {
+        return products.stream().anyMatch(product -> product.getId() == (productId));
     }
+
 }

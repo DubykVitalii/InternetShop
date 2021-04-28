@@ -1,11 +1,11 @@
 package main.java.model;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class User {
+    private static int count = 0;
 
-    private final String userId;
+    private final int userId;
     private String username;
     private String password;
     private UserRole userRole;
@@ -13,7 +13,7 @@ public class User {
     private String name;
 
     public User(String username, String password) {
-        this.userId = UUID.randomUUID().toString();
+        this.userId = count++;
         this.username = username;
         this.password = password;
         this.userRole = UserRole.USER;
@@ -22,15 +22,15 @@ public class User {
     }
 
     public User(String username, String password, UserRole userRole, boolean isActive, String name) {
-        this.userId = UUID.randomUUID().toString();
+        this.userId = count++;
         this.username = username;
         this.password = password;
         this.userRole = userRole;
-        this.isActive = isActive;
+        this.isActive = true;
         this.name = name;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
@@ -81,19 +81,13 @@ public class User {
     // User password not showed
     @Override
     public String toString() {
-        return ", name = '" + name + '\'' +
-                ", userName = '" + username + '\'' +
-                ", userRoles = " + getUserRole() +
-                ", active = " + isActive;
+        return ", \nID:" + userId + "\t" +
+                ", Name:" + name + "\t" +
+                ", userName:" + username + "\t" +
+                ", UserRoles:" + getUserRole() +
+                ", Active:" + isActive;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
-        return userId.equals(that.userId);
-    }
 
     @Override
     public int hashCode() {
