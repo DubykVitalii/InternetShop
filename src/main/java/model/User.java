@@ -81,9 +81,8 @@ public class User {
     // User password not showed
     @Override
     public String toString() {
-        return ", name = '" + name + '\'' +
-                ", userName = '" + username + '\'' +
-                ", userRoles = " + getUserRole() +
+        return  "  UserName = '" + username + '\'' +
+                ", userRole = " + getUserRole() +
                 ", active = " + isActive;
     }
 
