@@ -1,6 +1,5 @@
 package main.java;
 
-import main.java.dao.inmemorydb.PmChatInMemoryDao;
 import main.java.view.LoginMenu;
 import main.java.view.Menu;
 
