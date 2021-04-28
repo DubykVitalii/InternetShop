@@ -12,7 +12,7 @@ public class PmChat {
     public PmChat(String username, String message) {
         this.idChat = count++;
         this.username = username;
-        this.message.add(username+": "+message);
+        this.message.add(username + ": " + message);
     }
 
     public int getIdChat() {
@@ -36,7 +36,7 @@ public class PmChat {
     }
 
     public void setMessage(String username, String message) {
-        this.message.add(username+": "+message);
+        this.message.add(username + ": " + message);
     }
 
     @Override

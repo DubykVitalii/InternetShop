@@ -2,10 +2,10 @@ package main.java.dao.inmemorydb;
 
 
 import main.java.dao.PmChatDao;
-import main.java.model.Order;
 import main.java.model.PmChat;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PmChatInMemoryDao implements PmChatDao {
 
@@ -22,11 +22,22 @@ public class PmChatInMemoryDao implements PmChatDao {
         return entity;
     }
 
+    /**
+     * Add new message
+     *
+     * @param message
+     */
 
     @Override
     public void addMessage(String username, String message) {
-        pmChats.add(new PmChat(username,message));
+        pmChats.add(new PmChat(username, message));
     }
+
+    /**
+     * Get chat by id
+     *
+     * @return chat by id
+     */
 
     @Override
     public PmChat getChatById(int idChat) {
@@ -39,6 +50,11 @@ public class PmChatInMemoryDao implements PmChatDao {
         return pmChat;
     }
 
+    /**
+     * Get all chat
+     *
+     * @return all chat
+     */
     @Override
     public List<PmChat> getAllChat() {
         return List.copyOf(pmChats);
