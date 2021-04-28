@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class AdminMainMenu implements Menu {
     private Scanner scanner;
 
-    private final String[] itemsMenuAdmin = {"1. User menu", "2. Order confirm", "3. Product menu", "0. Exit"};
+    private final String[] itemsMenuAdmin = {"1. User menu", "2. Order confirm", "3. Product menu", "4. PM chat", "0. Exit"};
 
 
     /**
@@ -40,6 +40,9 @@ public class AdminMainMenu implements Menu {
                     break;
                 case 3:
                     new AdminProductMenu().show();
+                    break;
+                case 4:
+                    new AdminPmChat().show();
                     break;
                 case 0:
                     exit();

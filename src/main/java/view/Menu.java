@@ -12,7 +12,7 @@ public interface Menu {
      */
 
     default void showEntity(String strings) {
-        strings = strings.replaceAll("[^a-zA-Z0-9:. \n]", "");
+        strings = strings.replaceAll("[^a-zA-Z0-9:.? \n]", "");
         System.out.println(strings);
     }
 

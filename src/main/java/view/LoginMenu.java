@@ -13,7 +13,8 @@ import java.util.Scanner;
 public class LoginMenu implements Menu {
 
     private final String[] items = {"1. Login", "2. Register", "0. Exit"};
-    private Scanner scanner;
+    private Scanner scannerInt;
+    private Scanner scannerString;
 
     /**
      * Login menu
@@ -27,17 +28,17 @@ public class LoginMenu implements Menu {
     public void show() {
         showItems(items);
 
-        Scanner scanner = new Scanner(System.in);
-
+        scannerInt = new Scanner(System.in);
+        scannerString = new Scanner(System.in);
 
         while (true) {
-            int choice = scanner.nextInt();
+            int choice = scannerInt.nextInt();
             switch (choice) {
                 case 1:
-                    loginSubMenu(scanner);
+                    loginSubMenu(scannerInt);
                     break;
                 case 2:
-                    registerSubMenu(scanner);
+                    registerSubMenu(scannerInt);
                     break;
                 case 0:
                     exit();
@@ -60,12 +61,12 @@ public class LoginMenu implements Menu {
      *                 if user locked then sent message -> ("User is blocked...")
      */
 
-    private void loginSubMenu(Scanner scanner) {
+    private void loginSubMenu(Scanner scannerString) {
         System.out.println("input username:");
-        String username = scanner.next();
+        String username = scannerString.next();
 
         System.out.println("input password:");
-        String password = scanner.next();
+        String password = scannerString.next();
 
 
         try {
@@ -73,14 +74,14 @@ public class LoginMenu implements Menu {
                 Session.loginUser(UserInMemoryDao.getEntity().getUserByUsername(username));
             } else if (!UserService.getUserService().login(username, password)) {
                 System.err.println("Username or password are incorrect. Please try again...");
-                loginSubMenu(scanner);
+                loginSubMenu(scannerString);
             } else if (!UserService.getUserService().isActive(username)) {
                 System.err.println("User is blocked...");
                 show();
             }
         } catch (NullPointerException e) {
             System.err.println("Username or password are incorrect. Please try again...");
-            loginSubMenu(scanner);
+            loginSubMenu(scannerString);
         }
 
         try {
@@ -92,7 +93,7 @@ public class LoginMenu implements Menu {
 
         } catch (NullPointerException e) {
             System.err.println("Username or password are incorrect. Please try again...");
-            loginSubMenu(scanner);
+            loginSubMenu(scannerString);
         }
 
 
@@ -106,19 +107,19 @@ public class LoginMenu implements Menu {
      *                 if username is already exits then sent is message -> ("Username is already exists")
      */
 
-    private void registerSubMenu(Scanner scanner) {
+    private void registerSubMenu(Scanner scannerString) {
 
         System.out.println("Create login:");
-        String username = scanner.next();
+        String username = scannerString.next();
 
 
         if (UserInMemoryDao.getEntity().getUserByUsername(username) == null) {
             System.out.println("Create password:");
-            String password = scanner.next();
+            String password = scannerString.next();
             UserInMemoryDao.getEntity().saveUser(new User(username, password));
         } else {
             System.err.println("Username is already exists");
-            registerSubMenu(scanner);
+            registerSubMenu(scannerString);
         }
         System.out.println("You have been successfully registered");
 

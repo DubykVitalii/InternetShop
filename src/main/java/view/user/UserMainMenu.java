@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class UserMainMenu implements Menu {
     private Scanner scanner;
-    private final String[] itemsMenuUser = {"1. Product menu", "2. My order", "0. Exit"};
+    private final String[] itemsMenuUser = {"1. Product menu", "2. My order","3. PM Chat", "0. Exit"};
 
     /**
      * Main menu user
@@ -34,6 +34,9 @@ public class UserMainMenu implements Menu {
                     break;
                 case 2:
                     new UserOrderMenu().show();
+                    break;
+                case 3:
+                    new UserPmChat().show();
                     break;
                 case 0:
                     exit();
