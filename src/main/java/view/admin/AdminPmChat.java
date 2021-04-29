@@ -45,7 +45,7 @@ public class AdminPmChat implements Menu {
                     try {
                         showEntity(PmChatInMemoryDao.getEntity().getChatUser(userChatName).toString());
                     } catch (NullPointerException e) {
-                        System.err.println("Chat is empty");
+                        System.err.println("Chat not found");
                         show();
                     }
                     System.out.println("Enter a text:");
