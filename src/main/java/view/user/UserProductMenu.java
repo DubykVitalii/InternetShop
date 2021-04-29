@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class UserProductMenu implements Menu {
     private Scanner scannerString;
     private Scanner scannerInt;
-    private final String[] itemsProductMenuUser = {"1. Product list","2. Search by product categories","3. Shopping Cart", "4. Shopping Cart checkout", "0. Exit User Menu"};
+    private final String[] itemsProductMenuUser = {"1. Product list", "2. Search by product categories", "3. Shopping Cart", "4. Shopping Cart checkout", "0. Exit User Menu"};
 
 
     /**
@@ -21,8 +21,9 @@ public class UserProductMenu implements Menu {
      * @param itemsProductMenuUser - items product menu user
      * @param choice               - choice user (1 or 0)
      *                             if choice 1 show product list
-     *                             if choice 2 show shopping cart
-     *                             if choice 3 show shopping cart checkout
+     *                             if choice 2 search by product categories
+     *                             if choice 3 show shopping cart
+     *                             if choice 4 show shopping cart checkout
      *                             if choice 0 exit user main menu
      */
     @Override
