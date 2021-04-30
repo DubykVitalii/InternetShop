@@ -30,6 +30,9 @@ public class UserInMemoryDao implements UserDao {
         users.add(user1);
     }
 
+    /**
+     * Save new user
+     */
     @Override
     public void saveUser(User user) {
         users.add(user);

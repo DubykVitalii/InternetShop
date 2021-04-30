@@ -5,9 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
+
     private static int count = 0;
-
-
     private final int orderId;
     private final Date dateCreated;
     private final int customerId;
@@ -55,7 +54,6 @@ public class Order {
      *
      * @return list of product order
      */
-
     public List<Product> getListOfProducts() {
         return listOfProducts;
     }

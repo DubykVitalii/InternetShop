@@ -2,6 +2,7 @@ package main.java.view.admin;
 
 import main.java.Session;
 import main.java.dao.inmemorydb.PmChatInMemoryDao;
+import main.java.service.PmChatService;
 import main.java.view.Menu;
 
 import java.util.Scanner;
@@ -24,7 +25,6 @@ public class AdminPmChat implements Menu {
      */
     @Override
     public void show() {
-
         showItems(itemsAdminChat);
         scannerInt = new Scanner(System.in);
         scannerString = new Scanner(System.in);
@@ -35,7 +35,7 @@ public class AdminPmChat implements Menu {
                 case 1:
                     System.out.println("Chats:");
                     try {
-                        PmChatInMemoryDao.getEntity().userChatsName();
+                        PmChatService.getInstance().userChatsName();
                     } catch (NullPointerException e) {
                         System.out.println("Chats is empty");
                         show();
@@ -43,14 +43,14 @@ public class AdminPmChat implements Menu {
                     System.out.println("Enter userChatsName:");
                     String userChatName = scannerString.nextLine();
                     try {
-                        showEntity(PmChatInMemoryDao.getEntity().getChatUser(userChatName).toString());
+                        showEntity( PmChatService.getInstance().getChatUser(userChatName).toString());
                     } catch (NullPointerException e) {
                         System.err.println("Chat not found");
                         show();
                     }
                     System.out.println("Enter a text:");
                     String newMessage = scannerString.nextLine();
-                    PmChatInMemoryDao.getEntity().addMessageAdmin(Session.getCurrentUser().getUsername(), userChatName, newMessage);
+                    PmChatService.getInstance().addMessageAdmin(Session.getCurrentUser().getUsername(), userChatName, newMessage);
                     System.out.println("Message send successfully");
                     show();
                     break;

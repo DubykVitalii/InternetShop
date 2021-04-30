@@ -2,6 +2,7 @@ package main.java.view.admin;
 
 import main.java.dao.inmemorydb.UserInMemoryDao;
 import main.java.service.AdminService;
+import main.java.service.UserService;
 import main.java.view.Menu;
 
 import java.util.Scanner;
@@ -24,23 +25,22 @@ public class AdminUserMenu implements Menu {
     public void show() {
         showItems(itemsUserMenuAdmin);
         scanner = new Scanner(System.in);
-
         while (true) {
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    showEntity(UserInMemoryDao.getEntity().getAllUsers().toString());
+                    showEntity(UserService.getInstance().getAllUsers().toString());
                     System.out.println("Enter ID user");
                     int choiceIdUser = scanner.nextInt();
                     System.out.println("1. Blocked user");
                     System.out.println("2. Unlocked user");
                     int choiceBlockOrUnlockUser = scanner.nextInt();
                     if (choiceBlockOrUnlockUser == 1) {
-                        AdminService.getAdminService().blockUser(UserInMemoryDao.getEntity().getUserById(choiceIdUser));
+                        AdminService.getInstance().blockUser(UserService.getInstance().getUserById(choiceIdUser));
                         show();
                     } else if (choiceBlockOrUnlockUser == 2) {
-                        AdminService.getAdminService().unBlockUser(UserInMemoryDao.getEntity().getUserById(choiceIdUser));
+                        AdminService.getInstance().unBlockUser(UserService.getInstance().getUserById(choiceIdUser));
                         show();
                     } else {
                         System.err.println("Incorrect choice");

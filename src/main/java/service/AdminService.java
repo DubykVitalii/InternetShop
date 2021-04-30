@@ -6,11 +6,10 @@ import main.java.model.*;
 
 import java.util.List;
 
-// Make it singleton
 public class AdminService {
     private static AdminService adminService;
 
-    public static AdminService getAdminService() {
+    public static AdminService getInstance() {
         if (adminService == null) {
             adminService = new AdminService();
         }

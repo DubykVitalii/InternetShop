@@ -14,8 +14,7 @@ public class OrderInMemoryDao implements OrderDao {
     private final Set<Order> orders = new HashSet<>();
     private static OrderDao entity;
 
-    private OrderInMemoryDao() {
-    }
+    private OrderInMemoryDao() { }
 
     public static OrderDao getEntity() {
         if (entity == null) {
@@ -27,7 +26,6 @@ public class OrderInMemoryDao implements OrderDao {
     /**
      * Add order in memory dao
      */
-
     @Override
     public void addOrderInMemoryDao(Order order) {
         orders.add(order);
@@ -36,7 +34,6 @@ public class OrderInMemoryDao implements OrderDao {
     /**
      * Delete order in memory dao
      */
-
     public void deleteOrder(Order order) {
         orders.remove(order);
     }
@@ -47,7 +44,6 @@ public class OrderInMemoryDao implements OrderDao {
      * @param orderId - id order
      * @return find order by id
      */
-
     @Override
     public Order getOrderById(int orderId) {
         Order order = null;
@@ -64,7 +60,6 @@ public class OrderInMemoryDao implements OrderDao {
      *
      * @return List<Order> all orders
      */
-
     @Override
     public List<Order> getAllOrders() {
         return List.copyOf(orders);
@@ -76,7 +71,6 @@ public class OrderInMemoryDao implements OrderDao {
      * @param userId - id user
      * @return List<Order> user orders
      */
-
     @Override
     public List<Order> getUserOrders(int userId) {
         List<Order> ordersUser;

@@ -1,6 +1,7 @@
 package main.java.view.admin;
 
 import main.java.dao.inmemorydb.OrderInMemoryDao;
+import main.java.model.Order;
 import main.java.service.OrderService;
 import main.java.view.Menu;
 
@@ -14,34 +15,31 @@ public class AdminOrderMenu implements Menu {
     /**
      * Admin order menu
      *
-     * @param  itemsOrderMenuAdmin - items order menu admin
-     * @param  choice        - choice user (1,2,3 or 0)
-     * <p>
-     * if choice 1 show orders user and confirm/unconfirmed order
-     * if choice 0 exit admin main menu
+     * @param itemsOrderMenuAdmin - items order menu admin
+     * @param choice              - choice user (1,2,3 or 0)
+     *                            <p>
+     *                            if choice 1 show orders user and confirm/unconfirmed order
+     *                            if choice 0 exit admin main menu
      */
-
     @Override
     public void show() {
         showItems(itemsOrderMenuAdmin);
         scanner = new Scanner(System.in);
-
         while (true) {
             int choice = scanner.nextInt();
-
             switch (choice) {
                 case 1:
-                    showEntity(OrderInMemoryDao.getEntity().getAllOrders().toString());
+                    showEntity(OrderService.getInstance().getAllOrders().toString());
                     System.out.println("Enter ID product");
                     int choiceIdProduct = scanner.nextInt();
                     System.out.println("1. Confirm order");
                     System.out.println("2. Unconfirmed order");
                     int choiceConfirmOrUnconfirmed = scanner.nextInt();
                     if (choiceConfirmOrUnconfirmed == 1) {
-                        OrderService.getOrderService().orderConfirmed(OrderInMemoryDao.getEntity().getOrderById(choiceIdProduct));
+                        OrderService.getInstance().orderConfirmed(OrderService.getInstance().getOrderById(choiceIdProduct));
                         show();
                     } else if (choiceConfirmOrUnconfirmed == 2) {
-                        OrderService.getOrderService().orderCancelledAsAdmin(OrderInMemoryDao.getEntity().getOrderById(choiceIdProduct));
+                        OrderService.getInstance().orderCancelledAsAdmin(OrderService.getInstance().getOrderById(choiceIdProduct));
                         show();
                     } else {
                         System.err.println("Incorrect choice");

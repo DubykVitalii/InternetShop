@@ -79,7 +79,6 @@ public class ProductInMemoryDao implements ProductDao {
      *
      * @return list of product by name
      */
-
     @Override
     public List<Product> getProductsByName(String name) {
         if (products.stream().anyMatch(userModel -> userModel.getName().contains(name))) {

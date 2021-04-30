@@ -14,8 +14,7 @@ public class PmChatInMemoryDao implements PmChatDao {
     private final Map<String, List<PmChat>> pmChats = new TreeMap<>();
     private static PmChatDao entity;
 
-    private PmChatInMemoryDao() {
-    }
+    private PmChatInMemoryDao() { }
 
     public static PmChatDao getEntity() {
         if (entity == null) {
@@ -29,7 +28,6 @@ public class PmChatInMemoryDao implements PmChatDao {
      *
      * @param message
      */
-
     @Override
     public void addMessageUser(String username, String message) {
         if (pmChats.get(username) == null) {

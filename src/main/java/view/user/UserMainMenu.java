@@ -4,6 +4,7 @@ import main.java.Session;
 import main.java.view.LoginMenu;
 import main.java.view.Menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserMainMenu implements Menu {
@@ -20,14 +21,12 @@ public class UserMainMenu implements Menu {
      *                      if choice 2 show order menu
      *                      if choice 0 exit user main menu
      */
-
     @Override
-    public void show() {
+    public void show(){
         showItems(itemsMenuUser);
         scanner = new Scanner(System.in);
         while (true) {
             int choice = scanner.nextInt();
-
             switch (choice) {
                 case 1:
                     new UserProductMenu().show();
@@ -46,14 +45,12 @@ public class UserMainMenu implements Menu {
                     show();
             }
         }
-
     }
 
     /**
      * Exit login menu
      * Logout user
      */
-
     @Override
     public void exit() {
         Session.logoutUser();

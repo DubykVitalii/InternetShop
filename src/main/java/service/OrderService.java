@@ -7,6 +7,8 @@ import main.java.model.Order;
 import main.java.model.OrderStatus;
 import main.java.model.Product;
 
+import java.util.List;
+
 public class OrderService {
 
     private static OrderService orderService;
@@ -14,7 +16,7 @@ public class OrderService {
     private OrderService() {
     }
 
-    public static OrderService getOrderService() {
+    public static OrderService getInstance() {
         if (orderService == null) {
             orderService = new OrderService();
         }
@@ -27,7 +29,6 @@ public class OrderService {
      * If the shopping cart is empty, then new shopping cart is created and product is added to shopping cart.
      * If the shopping cart is not empty, then product is added to shopping cart.
      */
-
     public void addProductToShoppingCart(Product product) {
         if (ShoppingCart.getShoppingCart() == null) {
             ShoppingCart.createShoppingCart();
@@ -38,7 +39,6 @@ public class OrderService {
     /**
      * Remove product of shopping cart
      */
-
     public void removeProductOfShoppingCart(Product product) {
         ShoppingCart.getShoppingCart().removeProductOfOrder(product);
 
@@ -100,9 +100,27 @@ public class OrderService {
      * @param orderId id order
      *                Delete order(orderId) from db.
      */
-
     public void deleteOrder(int orderId) {
         OrderInMemoryDao.getEntity().deleteOrder(OrderInMemoryDao.getEntity().getOrderById(orderId));
+    }
+
+    /**
+     * Get all orders
+     *
+     * @return List<Order> all orders
+     */
+    public List<Order> getAllOrders() {
+        return List.copyOf(OrderInMemoryDao.getEntity().getAllOrders());
+    }
+
+    /**
+     * Get order by id
+     *
+     * @param orderId - id order
+     * @return find order by id
+     */
+    public Order getOrderById(int orderId) {
+        return OrderInMemoryDao.getEntity().getOrderById(orderId);
     }
 }
 

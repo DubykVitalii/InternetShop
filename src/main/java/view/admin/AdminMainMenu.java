@@ -5,13 +5,13 @@ import main.java.Session;
 import main.java.view.LoginMenu;
 import main.java.view.Menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AdminMainMenu implements Menu {
     private Scanner scanner;
 
     private final String[] itemsMenuAdmin = {"1. User menu", "2. Order confirm", "3. Product menu", "4. PM chat", "0. Exit"};
-
 
     /**
      * Admin main menu
@@ -24,13 +24,11 @@ public class AdminMainMenu implements Menu {
      *                       if choice 3 show Admin Product Menu
      *                       if choice 0 exit login menu
      */
-    public void show() {
+    public void show(){
         showItems(itemsMenuAdmin);
         scanner = new Scanner(System.in);
-
         while (true) {
             int choice = scanner.nextInt();
-
             switch (choice) {
                 case 1:
                     new AdminUserMenu().show();
@@ -58,7 +56,6 @@ public class AdminMainMenu implements Menu {
      * Exit login menu
      * Logout user
      */
-
     @Override
     public void exit() {
         Session.logoutUser();

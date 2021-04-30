@@ -4,6 +4,7 @@ import main.java.ShoppingCart;
 import main.java.dao.inmemorydb.ProductInMemoryDao;
 import main.java.model.ProductCategory;
 import main.java.service.OrderService;
+import main.java.service.ProductService;
 import main.java.view.Menu;
 
 import java.util.Scanner;
@@ -31,20 +32,18 @@ public class UserProductMenu implements Menu {
         showItems(itemsProductMenuUser);
         scannerInt = new Scanner(System.in);
         scannerString = new Scanner(System.in);
-
         while (true) {
             int choice = scannerInt.nextInt();
-
             switch (choice) {
                 case 1:
-                    showEntity(ProductInMemoryDao.getEntity().getAllProducts().toString());
+                    showEntity(ProductService.getInstance().getAllProducts().toString());
                     System.out.println("1. Add shopping cart product");
                     System.out.println("0. Exit Product Menu");
                     int choiceBuyOrExit = scannerInt.nextInt();
                     if (choiceBuyOrExit == 1) {
                         System.out.println("Enter ID Product but");
                         int choice3 = scannerInt.nextInt();
-                        OrderService.getOrderService().addProductToShoppingCart(ProductInMemoryDao.getEntity().getProductById(choice3));
+                        OrderService.getInstance().addProductToShoppingCart(ProductService.getInstance().getProductById(choice3));
                         show();
                     } else if (choiceBuyOrExit == 0) {
                         show();
@@ -61,7 +60,7 @@ public class UserProductMenu implements Menu {
                     int categoryId = scannerInt.nextInt();
                     if (categoryId <= ProductCategory.values().length) {
                         try {
-                            System.out.println(ProductInMemoryDao.getEntity().getProductsByCategory(ProductCategory.values()[categoryId]).toString());
+                            System.out.println(ProductService.getInstance().getProductsByCategory(ProductCategory.values()[categoryId]).toString());
                         } catch (NullPointerException e) {
                             System.err.println("Category is empty");
                             show();
@@ -72,7 +71,7 @@ public class UserProductMenu implements Menu {
                         if (choiceBuyCategoryOrExit == 1) {
                             System.out.println("Enter ID Product but");
                             int choice3 = scannerInt.nextInt();
-                            OrderService.getOrderService().addProductToShoppingCart(ProductInMemoryDao.getEntity().getProductById(choice3));
+                            OrderService.getInstance().addProductToShoppingCart(ProductService.getInstance().getProductById(choice3));
                             show();
                         } else if (choiceBuyCategoryOrExit == 0) {
                             show();
@@ -94,7 +93,7 @@ public class UserProductMenu implements Menu {
                         if (removeProduct == 1) {
                             System.out.println("Please enter id product:");
                             int idProduct = scannerInt.nextInt();
-                            OrderService.getOrderService().removeProductOfShoppingCart(ProductInMemoryDao.getEntity().getProductById(idProduct));
+                            OrderService.getInstance().removeProductOfShoppingCart(ProductService.getInstance().getProductById(idProduct));
                             System.out.println("Product delete successfully");
                             if (ShoppingCart.getShoppingCart().getListOfProducts().isEmpty()) {
                                 ShoppingCart.deleteShoppingCart();
@@ -109,7 +108,6 @@ public class UserProductMenu implements Menu {
                     }
                     break;
                 case 4:
-
                     try {
                         showEntity(ShoppingCart.getShoppingCart().toString());
                         System.out.println("You confirm the shopping cart?");
@@ -121,7 +119,7 @@ public class UserProductMenu implements Menu {
                     System.out.println("0. No");
                     int choice4 = scannerInt.nextInt();
                     if (choice4 == 1) {
-                        OrderService.getOrderService().orderCheckout();
+                        OrderService.getInstance().orderCheckout();
                         show();
                     } else {
                         show();

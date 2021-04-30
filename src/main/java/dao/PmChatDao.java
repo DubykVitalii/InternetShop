@@ -11,7 +11,6 @@ public interface PmChatDao {
 
     void addMessageAdmin(String adminname,String username, String message);
 
-
     List<PmChat> getChatUser(String username);
 
     Map<String, List<PmChat>> getAllChat();

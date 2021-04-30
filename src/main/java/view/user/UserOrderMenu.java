@@ -25,10 +25,9 @@ public class UserOrderMenu implements Menu {
         scanner = new Scanner(System.in);
         while (true) {
             int choice = scanner.nextInt();
-
             switch (choice) {
                 case 1:
-                    showEntity(OrderService.getOrderService().ordersUser());
+                    showEntity(OrderService.getInstance().ordersUser());
                     show();
                     break;
                 case 0:
