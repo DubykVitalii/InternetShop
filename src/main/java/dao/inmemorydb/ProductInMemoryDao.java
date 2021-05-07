@@ -15,16 +15,16 @@ public class ProductInMemoryDao implements ProductDao {
     private static ProductDao entity;
 
     private ProductInMemoryDao() {
-        Product milk = new Product("Milk", 20, 20, ProductCategory.FOOD);
-        Product water = new Product("Water", 10, 50, ProductCategory.FOOD);
-        Product honey = new Product("Honey", 125, 20, ProductCategory.FOOD);
-        Product apple = new Product("Apple", 25, 50, ProductCategory.FOOD);
-        Product tomato = new Product("Tomato", 22, 20, ProductCategory.FOOD);
-        Product meat = new Product("Meat", 150, 50, ProductCategory.FOOD);
-        Product beef = new Product("Beef", 200, 20, ProductCategory.FOOD);
-        Product iPhone = new Product("iPhone12", 20000, 20, ProductCategory.GADGETS);
-        Product asus_laptop_x500 = new Product("Asus Laptop x500", 200, 20, ProductCategory.GADGETS);
-        Product jackDaniels = new Product("Jack Daniels", 500, 20, ProductCategory.ALCOHOL);
+        Product milk = new Product("Milk", 20,  ProductCategory.FOOD);
+        Product water = new Product("Water", 10,  ProductCategory.FOOD);
+        Product honey = new Product("Honey", 125,  ProductCategory.FOOD);
+        Product apple = new Product("Apple", 25,  ProductCategory.FOOD);
+        Product tomato = new Product("Tomato", 22,  ProductCategory.FOOD);
+        Product meat = new Product("Meat", 150,  ProductCategory.FOOD);
+        Product beef = new Product("Beef", 200,  ProductCategory.FOOD);
+        Product iPhone = new Product("iPhone12", 20000,  ProductCategory.GADGETS);
+        Product asus_laptop_x500 = new Product("Asus Laptop",  20, ProductCategory.GADGETS);
+        Product jackDaniels = new Product("Jack Daniels", 500,  ProductCategory.ALCOHOL);
         products.add(milk);
         products.add(water);
         products.add(honey);

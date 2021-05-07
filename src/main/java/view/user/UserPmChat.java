@@ -16,8 +16,8 @@ public class UserPmChat implements Menu {
     /**
      * User pm chat
      *
-     * @param itemsUserChat - items pm chat user
-     * @param choice        - choice user (1,2 or 0)
+     * itemsUserChat - items pm chat user
+     * choice        - choice user (1,2 or 0)
      *
      *                      <p>
      *                      if choice 1 send a chat new message
@@ -36,7 +36,8 @@ public class UserPmChat implements Menu {
                     System.out.println("Enter a text:");
                     String newMessage = scannerString.nextLine();
                     PmChatService.getInstance().addMessageUser(Session.getCurrentUser().getUsername(), newMessage);
-                    System.out.println("Message send successfully");
+                    System.out.println("Message send successfully...");
+                    System.out.println();
                     show();
                     break;
                 case 2:
@@ -44,16 +45,15 @@ public class UserPmChat implements Menu {
                     try {
                         showEntity( PmChatService.getInstance().getChatUser(Session.getCurrentUser().getUsername()).toString());
                     } catch (NullPointerException e) {
-                        System.err.println("Chat is empty");
+                        System.err.println("Chat is empty...");
                         show();
                     }
-                    System.out.println();
                     show();
                 case 0:
                     exit();
                     break;
                 default:
-                    System.err.println("Incorrect choice");
+                    System.err.println("Incorrect choice...");
                     show();
             }
         }

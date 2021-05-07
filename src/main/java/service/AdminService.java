@@ -36,18 +36,17 @@ public class AdminService {
         user.setIsActive(true);
     }
 
-    public Product createProduct(String name, double price, int amountInStock, ProductCategory category) {
-        return new Product(name, price, amountInStock, category);
+    public Product createProduct(String name, double price, ProductCategory category) {
+        return new Product(name, price,  category);
     }
 
     public void showInfoAboutProduct(Product product) {
         System.out.println(product.toString());
     }
 
-    public void updateProduct(Product product, String newName, double newPrice, int newAmountInStock, ProductCategory newCategory) {
+    public void updateProduct(Product product, String newName, double newPrice, ProductCategory newCategory) {
         product.setName(newName);
         product.setPrice(newPrice);
-        product.setAmountInStock(newAmountInStock);
         product.setCategory(newCategory);
     }
 

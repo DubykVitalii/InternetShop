@@ -13,8 +13,8 @@ public class UserOrderMenu implements Menu {
     /**
      * Order menu user
      *
-     * @param itemsOrderUser - items order menu user
-     * @param choice         - choice user (1 or 0)
+     * itemsOrderUser - items order menu user
+     * choice         - choice user (1 or 0)
      *                       if choice != (1 or 0) default --> show();
      *                       if choice 1 show orders user
      *                       if choice 0 exit user main menu
@@ -34,7 +34,7 @@ public class UserOrderMenu implements Menu {
                     exit();
                     break;
                 default:
-                    System.err.println("Incorrect choice");
+                    System.err.println("Incorrect choice...");
                     show();
             }
         }

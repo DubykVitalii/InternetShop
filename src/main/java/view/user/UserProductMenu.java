@@ -1,7 +1,6 @@
 package main.java.view.user;
 
 import main.java.ShoppingCart;
-import main.java.dao.inmemorydb.ProductInMemoryDao;
 import main.java.model.ProductCategory;
 import main.java.service.OrderService;
 import main.java.service.ProductService;
@@ -19,8 +18,8 @@ public class UserProductMenu implements Menu {
      * Product menu user
      * <p>
      *
-     * @param itemsProductMenuUser - items product menu user
-     * @param choice               - choice user (1 or 0)
+     * itemsProductMenuUser - items product menu user
+     * choice               - choice user (1 or 0)
      *                             if choice 1 show product list
      *                             if choice 2 search by product categories
      *                             if choice 3 show shopping cart
@@ -43,12 +42,18 @@ public class UserProductMenu implements Menu {
                     if (choiceBuyOrExit == 1) {
                         System.out.println("Enter ID Product but");
                         int choice3 = scannerInt.nextInt();
-                        OrderService.getInstance().addProductToShoppingCart(ProductService.getInstance().getProductById(choice3));
-                        show();
+                        if (ProductService.getInstance().getProductById(choice3) != null) {
+                            OrderService.getInstance().addProductToShoppingCart(ProductService.getInstance().getProductById(choice3));
+                            System.out.println("Product successfully add to shopping cart...");
+                            show();
+                        } else {
+                            System.err.println("The product with such ID does not exist");
+                            show();
+                        }
                     } else if (choiceBuyOrExit == 0) {
                         show();
                     } else {
-                        System.err.println("Incorrect choice");
+                        System.err.println("Incorrect choice...");
                         show();
                     }
                     break;
@@ -76,11 +81,11 @@ public class UserProductMenu implements Menu {
                         } else if (choiceBuyCategoryOrExit == 0) {
                             show();
                         } else {
-                            System.err.println("Incorrect choice");
+                            System.err.println("Incorrect choice...");
                             show();
                         }
                     } else {
-                        System.err.println("Incorrect choice");
+                        System.err.println("Incorrect choice...");
                         show();
                     }
                     break;
@@ -94,7 +99,7 @@ public class UserProductMenu implements Menu {
                             System.out.println("Please enter id product:");
                             int idProduct = scannerInt.nextInt();
                             OrderService.getInstance().removeProductOfShoppingCart(ProductService.getInstance().getProductById(idProduct));
-                            System.out.println("Product delete successfully");
+                            System.out.println("Product delete successfully...");
                             if (ShoppingCart.getShoppingCart().getListOfProducts().isEmpty()) {
                                 ShoppingCart.deleteShoppingCart();
                             }
@@ -103,7 +108,7 @@ public class UserProductMenu implements Menu {
                             show();
                         }
                     } catch (NullPointerException e) {
-                        System.err.println("Shopping cart is empty");
+                        System.err.println("Shopping cart is empty...");
                         show();
                     }
                     break;
@@ -112,7 +117,7 @@ public class UserProductMenu implements Menu {
                         showEntity(ShoppingCart.getShoppingCart().toString());
                         System.out.println("You confirm the shopping cart?");
                     } catch (NullPointerException e) {
-                        System.err.println("Shopping cart is empty");
+                        System.err.println("Shopping cart is empty...");
                         show();
                     }
                     System.out.println("1. Yes");
@@ -129,7 +134,7 @@ public class UserProductMenu implements Menu {
                     exit();
                     break;
                 default:
-                    System.err.println("Incorrect choice");
+                    System.err.println("Incorrect choice...");
                     show();
             }
         }

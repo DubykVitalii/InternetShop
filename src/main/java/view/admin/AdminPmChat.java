@@ -16,8 +16,8 @@ public class AdminPmChat implements Menu {
     /**
      * Admin pm chat
      *
-     * @param itemsAdminChat - items pm chat admin
-     * @param choice         - choice user (1 or 0)
+     * itemsAdminChat - items pm chat admin
+     * choice         - choice user (1 or 0)
      *
      *                       <p>
      *                       if choice 1 show chats with users
@@ -37,28 +37,39 @@ public class AdminPmChat implements Menu {
                     try {
                         PmChatService.getInstance().userChatsName();
                     } catch (NullPointerException e) {
-                        System.out.println("Chats is empty");
+                        System.err.println("Chats is empty...");
                         show();
                     }
                     System.out.println("Enter userChatsName:");
                     String userChatName = scannerString.nextLine();
                     try {
+                        System.out.print("Chat with " + userChatName + ":");
                         showEntity( PmChatService.getInstance().getChatUser(userChatName).toString());
                     } catch (NullPointerException e) {
-                        System.err.println("Chat not found");
+                        System.err.println("Chat not found...");
                         show();
                     }
-                    System.out.println("Enter a text:");
-                    String newMessage = scannerString.nextLine();
-                    PmChatService.getInstance().addMessageAdmin(Session.getCurrentUser().getUsername(), userChatName, newMessage);
-                    System.out.println("Message send successfully");
+                    System.out.println("1. Enter a text");
+                    System.out.println("0. Exit PM chat menu");
+                    int choiceEnterChatOrExit = scannerInt.nextInt();
+                    if(choiceEnterChatOrExit==1) {
+                        System.out.println("Enter a text:");
+                        String newMessage = scannerString.nextLine();
+                        PmChatService.getInstance().addMessageAdmin(Session.getCurrentUser().getUsername(), userChatName, newMessage);
+                        System.out.println("Message send successfully...");
+                        System.out.println();
+                    } else if(choiceEnterChatOrExit==0) {
+                        show();
+                    } else {
+                        System.err.println("Incorect choice...");
+                    }
                     show();
                     break;
                 case 0:
                     exit();
                     break;
                 default:
-                    System.err.println("Incorrect choice");
+                    System.err.println("Incorrect choice...");
                     show();
             }
         }

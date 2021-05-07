@@ -19,8 +19,8 @@ public class LoginMenu implements Menu {
     /**
      * Login menu
      *
-     * @param items  - items login menu
-     * @param choice - choice user (1,2 or 0)
+     * items  - items login menu
+     * choice - choice user (1,2 or 0)
      *               if choice != (1,2 or 0 ) default --> show();
      */
     @Override
@@ -50,8 +50,8 @@ public class LoginMenu implements Menu {
     /**
      * Login menu
      *
-     * @param username - username user
-     * @param password - password user
+     * username - username user
+     * password - password user
      *                 if username or password incorrect
      *                 then sent message -> ("Username or password are incorrect. Please try again...")
      *                 if user locked then sent message -> ("User is blocked...")
@@ -90,8 +90,8 @@ public class LoginMenu implements Menu {
     /**
      * Register menu
      *
-     * @param username - username user
-     * @param password - password user
+     * username - username user
+     * password - password user
      *                 if username is already exits then sent is message -> ("Username is already exists")
      */
     private void registerSubMenu(Scanner scannerString) {
@@ -102,10 +102,10 @@ public class LoginMenu implements Menu {
             String password = scannerString.next();
             UserService.getInstance().saveUser(new User(username, password));
         } else {
-            System.err.println("Username is already exists");
+            System.err.println("Username is already exists...");
             registerSubMenu(scannerString);
         }
-        System.out.println("You have been successfully registered");
+        System.out.println("You have been successfully registered...");
 
         show();
     }

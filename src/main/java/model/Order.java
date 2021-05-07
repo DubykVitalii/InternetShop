@@ -71,7 +71,6 @@ public class Order {
     public void addProductOfOrder(Product product) {
         this.listOfProducts.add(product);
         this.sum = sum + product.getPrice();
-        product.setAmountInStock(product.getAmountInStock() - 1);
     }
 
     /**
@@ -80,18 +79,16 @@ public class Order {
     public void removeProductOfOrder(Product product) {
         this.listOfProducts.remove(product);
         this.sum = this.sum - product.getPrice();
-        product.setAmountInStock(product.getAmountInStock() + 1);
     }
 
 
     @Override
     public String toString() {
-        return "\nOrderID:" + orderId +
-                ", Date:" + dateCreated +
-                ", CustomerId:" + customerId +
-                ", ListOfProduct:" + listOfProducts +
-                ", Sum order:" + sum +
-                ", OrderStatus=" + orderStatus +
+        return "\nOrder ID:" + orderId +
+                ",\nDate:" + dateCreated +
+                ",\nList of product:" + listOfProducts +
+                ",\nSum order:" + sum +
+                ",\nOrder Status:" + orderStatus +
                 '}';
     }
 }

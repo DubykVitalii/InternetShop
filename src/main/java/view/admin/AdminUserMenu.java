@@ -10,15 +10,16 @@ import java.util.Scanner;
 public class AdminUserMenu implements Menu {
     private Scanner scanner;
 
-    private final String[] itemsUserMenuAdmin = {"1. Block/Unlock users", "0. Exit Admin Menu"};
+    private final String[] itemsUserMenuAdmin = {"1. Block/Unlock users","2. Show list users", "0. Exit Admin Menu"};
 
     /**
      * Admin user menu
      *
-     * @param itemsUserMenuAdmin - items user menu admin
-     * @param choice             - choice user (1,2,3 or 0)
+     * itemsUserMenuAdmin - items user menu admin
+     * choice             - choice user (1,2,3 or 0)
      *                           <p>
-     *                           if choice 1 show users list and block/unlock users
+     *                           if choice 1 block/unlock users
+     *                           if choice 1 show users list
      *                           if choice 0 exit admin main menu
      */
     @Override
@@ -43,15 +44,19 @@ public class AdminUserMenu implements Menu {
                         AdminService.getInstance().unBlockUser(UserService.getInstance().getUserById(choiceIdUser));
                         show();
                     } else {
-                        System.err.println("Incorrect choice");
+                        System.err.println("Incorrect choice...");
                         show();
                     }
+                    break;
+                case 2:
+                    showEntity(UserService.getInstance().getAllUsers().toString());
+                    show();
                     break;
                 case 0:
                     exit();
                     break;
                 default:
-                    System.err.println("Incorrect choice");
+                    System.err.println("Incorrect choice...");
                     show();
             }
         }

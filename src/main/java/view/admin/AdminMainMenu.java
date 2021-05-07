@@ -16,8 +16,8 @@ public class AdminMainMenu implements Menu {
     /**
      * Admin main menu
      *
-     * @param itemsMenuAdmin - items menu admin
-     * @param choice         - choice user (1,2,3 or 0)
+     * itemsMenuAdmin - items menu admin
+     * choice         - choice user (1,2,3 or 0)
      *                       <p>
      *                       if choice 1 show Admin User Menu
      *                       if choice 2 show Admin Order Menu

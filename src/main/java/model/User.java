@@ -18,7 +18,7 @@ public class User {
         this.password = password;
         this.userRole = UserRole.USER;
         this.isActive = true;
-        this.name = "";
+        this.name = username;
     }
 
     public User(String username, String password, UserRole userRole, boolean isActive, String name) {
@@ -81,10 +81,10 @@ public class User {
     // User password not showed
     @Override
     public String toString() {
-        return ", \nID:" + userId + "\t" +
-                ", Name:" + name + "\t" +
-                ", userName:" + username + "\t" +
-                ", UserRoles:" + getUserRole() +
+        return "\nUser ID:" + userId + "\t" +
+                ", name:" + name + "\t" +
+                ", username:" + username + "\t" +
+                ", User Roles:" + getUserRole() +
                 ", Active:" + isActive;
     }
 

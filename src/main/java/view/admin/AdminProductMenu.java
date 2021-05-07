@@ -1,6 +1,5 @@
 package main.java.view.admin;
 
-import main.java.dao.inmemorydb.ProductInMemoryDao;
 import main.java.model.Product;
 import main.java.model.ProductCategory;
 import main.java.service.ProductService;
@@ -12,17 +11,18 @@ public class AdminProductMenu implements Menu {
     private Scanner scannerInt;
     private Scanner scannerString;
 
-    private final String[] itemsProductMenuAdmin = {"1. Edit existing product details", "2. Add new product", "3. List of all product.", "0. Exit Admin Menu"};
+    private final String[] itemsProductMenuAdmin = {"1. Edit existing product details", "2. Add new product", "3. List of all product.", "4. Remove product", "0. Exit Admin Menu"};
 
     /**
      * Admin product menu
      *
-     * @param itemsProductMenuAdmin - items product menu admin
-     * @param choice                - choice user (1,2,3 or 0)
+     * itemsProductMenuAdmin - items product menu admin
+     * choice                - choice user (1,2,3 or 0)
      *                              <p>
      *                              if choice 1 show product and edit product
      *                              if choice 2 add new product
      *                              if choice 3 show list all product
+     *                              if choice 4 remove product menu
      *                              if choice 0 exit admin main menu
      */
     @Override
@@ -41,7 +41,6 @@ public class AdminProductMenu implements Menu {
                     System.out.println("Select details to edit");
                     System.out.println("1. Name");
                     System.out.println("2. Price");
-                    System.out.println("3. Amount in stock");
                     int editDetails = scannerInt.nextInt();
                     if (editDetails == 1) {
                         System.out.println("Enter a new name product");
@@ -53,11 +52,6 @@ public class AdminProductMenu implements Menu {
                         double price = scannerInt.nextDouble();
                         ProductService.getInstance().getProductById(idProduct).setPrice(price);
                         show();
-                    } else if (editDetails == 3) {
-                        System.out.println("Enter a new amount in stock product");
-                        int amountInStock = scannerInt.nextInt();
-                        ProductService.getInstance().getProductById(idProduct).setAmountInStock(amountInStock);
-                        show();
                     } else {
                         System.err.println("Incorrect choice...");
                         show();
@@ -68,19 +62,35 @@ public class AdminProductMenu implements Menu {
                     String nameProduct = scannerString.next();
                     System.out.println("Enter a price product:");
                     double price = scannerInt.nextDouble();
-                    System.out.println("Enter an amount in stock product:");
-                    int amountInStock = scannerInt.nextInt();
                     System.out.println("Enter a category id product:");
                     for (int i = 0; i < ProductCategory.values().length; i++) {
                         System.out.println("ID:" + i + " " + ProductCategory.values()[i]);
                     }
                     int categoryId = scannerInt.nextInt();
-                    ProductService.getInstance().addProduct(new Product(nameProduct, price, amountInStock, ProductCategory.values()[categoryId]));
+                    try {
+                        ProductService.getInstance().addProduct(new Product(nameProduct, price, ProductCategory.values()[categoryId]));
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.err.println("There is no product category...");
+                        show();
+                    }
                     System.out.println("Product successfully added...");
                     show();
                     break;
                 case 3:
                     showEntity(ProductService.getInstance().getAllProducts().toString());
+                    show();
+                case 4:
+                    showEntity(ProductService.getInstance().getAllProducts().toString());
+                    System.out.println("Enter ID product remove:");
+                    int idProductRemove = scannerInt.nextInt();
+
+                    if (ProductService.getInstance().getProductById(idProductRemove) != null) {
+                        ProductService.getInstance().removeProduct(idProductRemove);
+                        System.out.println("Product successfully remove...");
+                    } else {
+                        System.err.println("The product with such ID does not exist...");
+                        show();
+                    }
                     show();
                 case 0:
                     exit();

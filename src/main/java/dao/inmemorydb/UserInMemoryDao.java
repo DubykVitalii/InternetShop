@@ -24,10 +24,8 @@ public class UserInMemoryDao implements UserDao {
     private UserInMemoryDao() {
         User admin = new User("admin", "admin", UserRole.ADMIN, true, "Admin");
         User user = new User("user", "user", UserRole.USER, true, "user");
-        User user1 = new User("testuser", "testuser", UserRole.USER, true, "user");
         users.add(admin);
         users.add(user);
-        users.add(user1);
     }
 
     /**

@@ -14,11 +14,12 @@ public class UserMainMenu implements Menu {
     /**
      * Main menu user
      *
-     * @param itemsMenuUser - items menu user
-     * @param choice        - choice user (1,2 or 0)
+     * itemsMenuUser - items menu user
+     * choice        - choice user (1,2 or 0)
      *                      if choice != (1,2 or 0 ) default --> show();
      *                      if choice 1 show user product menu
      *                      if choice 2 show order menu
+     *                      if choice 3 show pm chat menu
      *                      if choice 0 exit user main menu
      */
     @Override
@@ -41,7 +42,7 @@ public class UserMainMenu implements Menu {
                     exit();
                     break;
                 default:
-                    System.err.println("Incorrect choice");
+                    System.err.println("Incorrect choice...");
                     show();
             }
         }

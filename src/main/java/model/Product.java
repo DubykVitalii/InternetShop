@@ -8,14 +8,12 @@ public class Product {
     private int productId;
     private String name;
     private double price;
-    private int amountInStock;
     private ProductCategory category;
 
-    public Product(String name, double price, int amountInStock, ProductCategory category) {
+    public Product(String name, double price, ProductCategory category) {
         this.productId = count++;
         this.name = name;
         this.price = price;
-        this.amountInStock = amountInStock;
         this.category = category;
     }
 
@@ -39,18 +37,6 @@ public class Product {
         this.price = price;
     }
 
-    public int getAmountInStock() {
-        return amountInStock;
-    }
-
-    public void setAmountInStock(int amountInStock) {
-        if (amountInStock > 0) {
-            this.amountInStock = amountInStock;
-        } else {
-            throw new RuntimeException("Amount of product can't be null");
-        }
-    }
-
     public ProductCategory getCategory() {
         return category;
     }
@@ -62,10 +48,9 @@ public class Product {
 
     @Override
     public String toString() {
-        return "\nProductID:" + productId +
+        return "\nProduct ID:" + productId +
                 ", Name:" + name + '\'' +
                 ", Price:" + price + '\'' +
- //               ", AmountInStock:" + amountInStock +
                 ", Category:" + category +
                 '}';
     }
